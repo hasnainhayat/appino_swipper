@@ -328,10 +328,26 @@ class _AppinioSwiperState extends State<AppinioSwiper>
           scale: _scale,
           child: Container(
             constraints: constraints,
+            child: widget.cardsBuilder(
+                context, (currentIndex + 1) % widget.cardsCount),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _foregroundItem(BoxConstraints constraints) {
+    return Positioned(
+      left: _left,
+      top: _top,
+      child: GestureDetector(
+        child: Transform.rotate(
+          angle: _angle,
+          child: Container(
+            constraints: constraints,
             child: Stack(
               children: [
-                widget.cardsBuilder(
-                    context, (currentIndex + 1) % widget.cardsCount),
+                widget.cardsBuilder(context, currentIndex),
                 if ((_top > -20 && _left > 20) ||
                     (_top < -20 && (_left > widget.threshold / 1.5)))
                   Positioned(
@@ -389,22 +405,6 @@ class _AppinioSwiperState extends State<AppinioSwiper>
                   )
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _foregroundItem(BoxConstraints constraints) {
-    return Positioned(
-      left: _left,
-      top: _top,
-      child: GestureDetector(
-        child: Transform.rotate(
-          angle: _angle,
-          child: Container(
-            constraints: constraints,
-            child: widget.cardsBuilder(context, currentIndex),
           ),
         ),
         onTap: () {
