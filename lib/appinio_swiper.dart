@@ -306,8 +306,7 @@ class _AppinioSwiperState extends State<AppinioSwiper>
                   clipBehavior: Clip.none,
                   fit: StackFit.expand,
                   children: [
-                    if (widget.loop || currentIndex < widget.cardsCount - 1)
-                      _backgroundItem(constraints),
+                   
                     if (currentIndex < widget.cardsCount)
                       _foregroundItem(constraints)
                   ]);
